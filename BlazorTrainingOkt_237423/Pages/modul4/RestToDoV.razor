@@ -1,0 +1,52 @@
+﻿@page "/todov"
+@inject IHttpClientFactory client
+<h3>RestToDoV</h3>
+<div class="container">
+  
+
+    <div class="row">
+        <div class="col">
+            <ul class="list-group list-group-flush">
+                @if (Liste == null)
+                {
+                    <li class="list-group-item">nix todo</li>
+                }
+                else
+                {
+                   
+
+                    <Virtualize Items="Liste" Context="item" OverscanCount="5" ItemSize="24">
+                        <ItemContent>
+                            <li class="list-group-item">
+                                @item.title
+                            </li>
+
+                        </ItemContent>
+                        <Placeholder>
+                            keine Daten
+                        </Placeholder>
+                    </Virtualize>
+                }
+
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+@code {
+    string Suche = "";
+
+    List<ToDoModel> Liste;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        using (var http = client.CreateClient())
+        {
+            Liste = await http.GetFromJsonAsync<List<ToDoModel>>("https://jsonplaceholder.typicode.com/todos");
+        }
+
+    }
+
+}
