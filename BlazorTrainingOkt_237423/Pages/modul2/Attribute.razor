@@ -1,0 +1,33 @@
+﻿@page "/attr"
+<h3>Attribute</h3>
+<input @bind-value="Wert"   />
+@Wert
+<button @onclick="click">click</button>
+
+<button onclick="click">click</button>
+<div @onclick="click"    @ref="div1"> text </div>
+<hr />
+<input @onkeydown="keydown" />
+<button @onclick="()=>click2(2)">click2</button>
+@code {
+    string Wert;
+    ElementReference div1;
+    void click2(int id)
+    {
+        
+    }
+    void click()
+    {
+        div1.FocusAsync();
+
+    }
+
+    void keydown(KeyboardEventArgs args)
+    {
+        if (args.Key=="A")
+        {
+            Wert = "AAAAAAAAAAAAAAAAA";
+        }
+
+    }
+}
