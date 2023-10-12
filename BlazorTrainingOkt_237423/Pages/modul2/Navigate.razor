@@ -1,0 +1,14 @@
+﻿@page "/navi/{par1?}"
+@inject NavigationManager navman
+<h3>Navigate</h3>
+@navman.Uri
+
+<a href="./navi/eins">eins</a>
+<a href="./zwei">zwei</a>
+
+@code {
+
+    [Parameter]
+    public string par1 { get; set; }
+
+}
