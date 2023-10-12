@@ -1,0 +1,55 @@
+﻿@page "/todo"
+@inject IHttpClientFactory client
+<h3>RestToDo</h3>
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+           
+                <div class="input-group mb-3">
+                    <input class="form-control"  @bind="Suche" @bind:event="oninput">
+                    <button class="btn btn-outline-secondary" type="button">filter</button>
+                </div>
+           
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <ul class="list-group list-group-flush">
+                @if (Liste==null)
+                {
+                      <li class="list-group-item">nix todo</li>
+                }
+                else
+                {
+                @foreach (var item in Liste.Where(x=>x.title.Contains(Suche,StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    <li class="list-group-item">
+                        @item.title
+                    </li>
+                }
+                }
+
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+@code {
+    string Suche="";
+
+    List<ToDoModel> Liste;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        using (var http=client.CreateClient())
+        {
+           Liste=await http.GetFromJsonAsync<List<ToDoModel>>("https://jsonplaceholder.typicode.com/todos");
+        }
+
+    }
+
+}
