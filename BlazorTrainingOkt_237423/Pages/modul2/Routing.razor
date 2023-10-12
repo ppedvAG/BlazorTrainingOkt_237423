@@ -1,0 +1,13 @@
+﻿@page "/franz"
+@page "/kunde/{id:int?}"
+<h3>Routing</h3>
+@(i+1)
+
+<div>@i</div>
+<div>@i</div>
+@id
+@code {
+    int i=1;
+    [Parameter]
+    public int id { get; set; }
+}
