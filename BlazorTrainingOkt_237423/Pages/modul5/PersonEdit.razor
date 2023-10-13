@@ -1,6 +1,7 @@
 ﻿@page "/person/{id:int?}"
 <h3>PersonEdit</h3>
-<EditForm Model="VM" OnSubmit="save">
+@* <EditForm Model="VM" OnSubmit="save"> *@
+    <EditForm EditContext="Sepp" OnSubmit="save">
     <DataAnnotationsValidator></DataAnnotationsValidator>
     <div class="mb-3 row">
         <label class="col-sm-2 col-form-label">Name</label>
@@ -41,12 +42,17 @@
     [Parameter]
     public int id { get; set; }
     Person VM = new Person();
+    EditContext Sepp;
     void save(EditContext franz)
     {
         if (franz.Validate())
         {
-            
+
         }
+    }
+    protected override void OnInitialized()
+    {
+        Sepp = new EditContext(VM);
     }
 
 }
