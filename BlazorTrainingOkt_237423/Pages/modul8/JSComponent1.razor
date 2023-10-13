@@ -1,0 +1,18 @@
+﻿@page "/js1"
+@using RazorClassLibrary1;
+
+@inject IJSRuntime JSRuntime
+<h3>JSComponent</h3>
+
+<button @onclick="prompt">click</button>
+@eingabe
+@code {
+    string eingabe;
+    async Task prompt()
+    {
+
+        var js = new ExampleJsInterop(JSRuntime);
+        eingabe =await js.Prompt("Hallo");
+
+    }
+}
