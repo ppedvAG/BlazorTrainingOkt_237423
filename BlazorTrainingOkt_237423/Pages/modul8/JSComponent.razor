@@ -1,0 +1,15 @@
+﻿@page "/js"
+@inject IJSRuntime JSRuntime
+<h3>JSComponent</h3>
+
+<button @onclick="prompt">click</button>
+@eingabe
+@code {
+    string eingabe;
+     async Task prompt()
+    {
+        
+       eingabe=await JSRuntime.InvokeAsync<string>("prompt", "ihre Eingabe");
+
+    }
+}
