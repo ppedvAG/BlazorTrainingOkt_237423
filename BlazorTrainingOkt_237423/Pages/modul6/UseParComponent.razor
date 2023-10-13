@@ -1,0 +1,24 @@
+﻿@page "/par1"
+@using modul5
+<h3>UseParComponent</h3>
+
+<CascadingValue Value="42" Name="test">
+    <CascadingValue Value="42">
+
+
+        <ParameterComponent MyProperty="42" MyProperty2="eins" name="sepp" person="@p" width="100px" @ref="comp1">
+           
+            <Head>Hannes</Head>
+            <Body><hr /> Body</Body>
+        </ParameterComponent>
+
+    </CascadingValue>
+</CascadingValue>
+@code {
+    Person p = new Person();
+    ParameterComponent comp1;
+    protected override void OnInitialized()
+    {
+        comp1.MyProperty =47;
+    }
+}

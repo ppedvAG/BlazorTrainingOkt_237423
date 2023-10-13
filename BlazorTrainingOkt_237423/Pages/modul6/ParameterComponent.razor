@@ -1,0 +1,31 @@
+﻿<h3 @attributes="@Attribute">ParameterComponent @Head
+</h3>
+@MyProperty2
+@ChildContent
+
+@Body
+
+@code {
+    [Parameter]
+    public int MyProperty { get; set; }
+
+    [Parameter]
+    [EditorRequired]
+    public string MyProperty2 { get; set; }
+
+    [Parameter(CaptureUnmatchedValues =true)]
+    public Dictionary<string,object> Attribute { get; set; }
+
+    [CascadingParameter]
+    public int Cas1 { get; set; }
+    [CascadingParameter(Name ="test")]
+    public int Cas2 { get; set; }
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    [Parameter]
+    public RenderFragment Head { get; set; }
+    [Parameter]
+    public RenderFragment Body { get; set; }
+}
+
